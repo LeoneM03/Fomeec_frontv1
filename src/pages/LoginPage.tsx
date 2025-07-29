@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LoginForm from '../components/auth/LoginForm';
 import RegisterForm from '../components/auth/RegisterForm';
-import LoginCarousel from '../components/auth/LoginCarousel';
+
 import '../styles/login.css';
 import '../styles/loginback.css';
 
@@ -23,7 +23,7 @@ export default function LoginPage() {
             )}
           </div>
 
-          <LoginCarousel />
+      
         </div>
       </div>
     </main>
