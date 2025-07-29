@@ -1,0 +1,463 @@
+@import url(//db.onlinewebfonts.com/c/cd3c54717103876e08487540a13d8143?family=ITC+Bauhaus);
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
+@font-face {
+    font-family: minutos;
+    src: url(../assets/tipografias/minutos.ttf);
+}
+:root{
+
+/* CSS HEX */
+--negro: #050703ff;
+--fondo-amarillo: #fee800ff;
+--fondo-naranja: #f3a001ff;
+--juanin: #fdfaf7ff;
+--juancarlos: #e91423ff;
+--tulio: #d6cfbdff;
+--celeste: #00C1B8ff;
+--indigo: #344B65ff;
+
+
+/* CSS HSL */
+--negro: hsla(90, 40%, 2%, 1);
+--fondo-amarillo: hsla(55, 100%, 50%, 1);
+--fondo-naranja: hsla(39, 99%, 48%, 1);
+--juanin: hsla(30, 60%, 98%, 1);
+--juancarlos: hsla(356, 84%, 50%, 1);
+--tulio: hsla(43, 23%, 79%, 1);
+--celeste: hsla(177, 100%, 38%, 1);
+--indigo: hsla(212, 32%, 30%, 1);
+
+}   
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+
+body{
+font-family: 'poppins';
+font-weight: normal;
+font-style: normal;
+}   
+
+
+
+
+
+
+/* page transition */
+
+.page-transition {
+  opacity: 0;
+  animation: fadeIn 4s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+/* Login & sign up style */
+
+.login main {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: var(--fondo-naranja);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+ .login .box {
+    position: relative;
+    width: 100%;
+    max-width: 1020px;
+    height: 690px;
+    background-color: #fff;
+    border-radius: 3.3rem;
+    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
+  }
+  
+  .login .inner-box {
+    position: absolute;
+    width: calc(100% - 4.1rem);
+    height: calc(100% - 4.1rem);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .login .forms-wrap {
+    position: absolute;
+    height: 100%;
+    width: 45%;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    transition: 0.8s ease-in-out;
+  }
+  
+  .login form {
+    max-width: 260px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    transition: opacity 0.02s 0.4s;
+  }
+  
+  .login form.sign-up-form {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .login .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .login .logo img {
+    width: 45%;
+    margin-right: 0.3rem;
+  }
+  
+  .login .logo h4 {
+    font-size: 1.1rem;
+    margin-top: -9px;
+    letter-spacing: -0.5px;
+    color: #151111;
+  }
+  
+  .login .heading h2 {
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: #151111;
+    font-family: 'minutos';
+  }
+  
+  .login .heading h6 {
+    color: #bababa;
+    font-weight: 400;
+    font-size: 0.75rem;
+    display: inline;
+  }
+  
+  .login .toggle {
+    color: var(--fondo-naranja);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  
+  .login .toggle:hover {
+    color: var(--celeste);
+  }
+  
+  .login .input-wrap {
+    position: relative;
+    height: 37px;
+    margin-bottom: 2rem;
+  }
+  
+  .login .input-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #bbb;
+    padding: 0;
+    font-size: 0.95rem;
+    color: #151111;
+    transition: 0.4s;
+  }
+  
+  .login label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: #bbb;
+    pointer-events: none;
+    transition: 0.4s;
+  }
+  
+  .login .input-field.active {
+    border-bottom-color: var(--fondo-naranja);
+  }
+  
+  .login .input-field.active + label {
+    font-size: 0.75rem;
+    top: -2px;
+  }
+  
+  .login .sign-btn {
+    display: inline-block;
+    width: 100%;
+    height: 43px;
+    background-color: var(--fondo-naranja);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    transition: 0.3s;
+  }
+  
+  .login .sign-btn:hover {
+    background-color: var(--celeste);
+  }
+  
+  .login .text {
+    color: #bbb;
+    font-size: 0.7rem;
+  }
+  
+  .login .text a {
+    color: var(--fondo-naranja);
+    transition: 0.3s;
+  }
+  
+  .login .text a:hover {
+    color: var(--celeste);
+  }
+
+
+  /* dezlisante */
+  .login main.sign-up-mode form.sign-in-form {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .login main.sign-up-mode form.sign-up-form {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .login main.sign-up-mode .forms-wrap {
+    left: 55%;
+  }
+  
+  .login main.sign-up-mode .carousel {
+    left: 0%;
+  }
+  
+
+
+  /* carrusel */
+  .login .carousel {
+    position: absolute;
+    height: 100%;
+    width: 55%;
+    left: 45%;
+    top: 0;
+    background-color: var(--celeste);
+    border-radius: 2rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding-bottom: 2rem;
+    overflow: hidden;
+    transition: 0.8s ease-in-out;
+  }
+  
+  .login .images-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  
+  .login .image {
+    width: 100%;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.5s;
+  }
+  
+  .login .img-1 {
+    transform: translate(0, -50px);
+  }
+  
+  .login .img-2 {
+    transform: scale(0.4, 0.5);
+  }
+  
+  .login .img-3 {
+    transform: scale(0.3) rotate(-20deg);
+  }
+  
+  .login .image.show {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .login .text-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .login .text-wrap {
+    max-height: 2.2rem;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  
+  .login .text-group {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transform: translateY(0);
+    transition: 0.5s;
+  }
+  
+  .login .text-group h2 {
+    line-height: 2.2rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+  
+  .login .bullets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login .bullets span {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #aaa;
+    margin: 0 0.25rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .login .bullets span.active {
+    width: 1.1rem;
+    background-color: #151111;
+    border-radius: 1rem;
+  }
+  
+
+
+
+
+  /* media queris */
+  @media (max-width: 850px) {
+    .login .box {
+      height: auto;
+      max-width: 550px;
+      overflow: hidden;
+    }
+  
+    .login .inner-box {
+      position: static;
+      transform: none;
+      width: revert;
+      height: revert;
+      padding: 2rem;
+    }
+  
+    .login .forms-wrap {
+      position: revert;
+      width: 100%;
+      height: auto;
+    }
+  
+    .login form {
+      max-width: revert;
+      padding: 1.5rem 2.5rem 2rem;
+      transition: transform 0.8s ease-in-out, opacity 0.45s linear;
+    }
+  
+    .login .heading {
+      margin: 2rem 0;
+    }
+  
+    .login form.sign-up-form {
+      transform: translateX(100%);
+    }
+  
+    .login main.sign-up-mode form.sign-in-form {
+      transform: translateX(-100%);
+    }
+  
+    .login main.sign-up-mode form.sign-up-form {
+      transform: translateX(0%);
+    }
+  
+    .login .carousel {
+      position: revert;
+      height: auto;
+      width: 100%;
+      padding: 3rem 2rem;
+      display: flex;
+    }
+  
+    .login .images-wrapper {
+      display: none;
+    }
+  
+   .login .text-slider {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 530px) {
+   .login main {
+      padding: 1rem;
+    }
+  
+    .login .box {
+      border-radius: 2rem;
+    }
+  
+    .login .inner-box {
+      padding: 1rem;
+    }
+  
+    .login .carousel {
+      padding: 1.5rem 1rem;
+      border-radius: 1.6rem;
+    }
+  
+    .login .text-wrap {
+      margin-bottom: 1rem;
+    }
+  
+    .login .text-group h2 {
+      font-size: 1.2rem;
+    }
+  
+   .login form {
+      padding: 1rem 2rem 1.5rem;
+    }
+  }
+  
