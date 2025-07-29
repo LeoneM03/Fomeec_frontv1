@@ -1,8 +1,18 @@
-import { useLoginCarousel } from '../../hooks/useLoginCarousel';
+import React from "react";
 
-export default function LoginCarousel() {
-  const { activeIndex, setSlide } = useLoginCarousel();
+interface Props {
+  activeIndex: number;
+  moveSlider: (index: number) => void;
+}
 
+const texts = [
+  "¡Estamos al aire!",
+  "Con niveles de poder",
+  "Conociendo a las estrellas",
+  "y hecho por mera diversión",
+];
+
+export default function LoginCarousel({ activeIndex, moveSlider }: Props) {
   return (
     <div className="carousel">
       <div className="images-wrapper">
@@ -11,7 +21,7 @@ export default function LoginCarousel() {
             key={i}
             src={`/src/assets/logimg/bk-lg${i}.png`}
             alt={`img${i}`}
-            className={`image img-${i} ${activeIndex === i ? 'show' : ''}`}
+            className={`image img-${i} ${activeIndex === i ? "show" : ""}`}
           />
         ))}
       </div>
@@ -22,10 +32,9 @@ export default function LoginCarousel() {
             className="text-group"
             style={{ transform: `translateY(${-(activeIndex - 1) * 2.2}rem)` }}
           >
-            <h2>¡Estamos al aire!</h2>
-            <h2>Con niveles de poder</h2>
-            <h2>Conociendo a las estrellas</h2>
-            <h2>y hecho por mera diversión</h2>
+            {texts.map((text, idx) => (
+              <h2 key={idx}>{text}</h2>
+            ))}
           </div>
         </div>
 
@@ -34,10 +43,10 @@ export default function LoginCarousel() {
             <span
               key={i}
               data-value={i}
-              className={activeIndex === i ? 'active' : ''}
-              onClick={() => setSlide(i)}
-              style={{ cursor: 'pointer' }}
-            ></span>
+              className={activeIndex === i ? "active" : ""}
+              onClick={() => moveSlider(i)}
+              style={{ cursor: "pointer" }}
+            />
           ))}
         </div>
       </div>
