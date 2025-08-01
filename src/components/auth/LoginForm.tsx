@@ -1,48 +1,55 @@
-import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../services/authService";
+import logo31 from '../../assets/logimg/31logo.png';
 
-type LoginFormProps = {
-  onSwitchToRegister: () => void;
-};
+interface LoginFormProps {
+  onToggle: () => void;
+  onLoginSuccess: (token: string) => void;
+}
 
-export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
-  const { login } = useAuth();
+const LoginForm: React.FC<LoginFormProps> = ({ onToggle, onLoginSuccess }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setSuccessMessage('');
     try {
-      await login(email, password);
-      setSuccessMessage('Has iniciado sesión correctamente.');
-      // Aquí puedes redirigir o lo que necesites hacer tras login exitoso
-    } catch (err) {
-      setError('Error al iniciar sesión. Verifica tus datos.');
+      const data = await login(email, password);
+      localStorage.setItem("token", data.token);
+      onLoginSuccess(data.token);
+      navigate("/home"); // 👉 Redirección al home
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Error en login");
+    }
+  };
+
+  const handleFocus = (ref: React.RefObject<HTMLInputElement>) => {
+    ref.current?.classList.add("active");
+  };
+  const handleBlur = (ref: React.RefObject<HTMLInputElement>) => {
+    if (ref.current && ref.current.value === "") {
+      ref.current.classList.remove("active");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="sign-in-form" autoComplete="off">
+    <form className="sign-in-form" onSubmit={handleSubmit} autoComplete="off">
       <div className="logo">
-        <img src="/src/assets/logimg/31logo.png" alt="Logo" />
+        <img src={logo31} alt="31-minutos" />
       </div>
 
       <div className="heading">
         <h2>Bienvenido</h2>
-        <h6>¿Aun no tienes cuenta?</h6>
-        <button
-          type="button"
-          className="toggle"
-          onClick={onSwitchToRegister}
-          style={{ background: 'none', border: 'none', color: 'blue', cursor: 'pointer', padding: 0 }}
-        >
+        <h6>¿Aún no tienes cuenta?</h6>
+        <a href="#" className="toggle" onClick={(e) => { e.preventDefault(); onToggle(); }}>
           Regístrate
-        </button>
+        </a>
       </div>
 
       <div className="actual-form">
@@ -54,6 +61,9 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            ref={emailRef}
+            onFocus={() => handleFocus(emailRef)}
+            onBlur={() => handleBlur(emailRef)}
           />
           <label>Email</label>
         </div>
@@ -61,19 +71,22 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         <div className="input-wrap">
           <input
             type="password"
+            minLength={4}
             className="input-field"
             autoComplete="off"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            ref={passwordRef}
+            onFocus={() => handleFocus(passwordRef)}
+            onBlur={() => handleBlur(passwordRef)}
           />
           <label>Contraseña</label>
         </div>
 
-        <input type="submit" value="Iniciar" className="sign-btn" />
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
-        {error && <p className="text" style={{ color: 'red' }}>{error}</p>}
-        {successMessage && <p className="text" style={{ color: 'green' }}>{successMessage}</p>}
+        <input type="submit" value="Iniciar" className="sign-btn" />
 
         <p className="text">
           ¿Olvidaste tu Contraseña? <a href="#">Te ayudamos</a> a recuperarla.
@@ -81,4 +94,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
       </div>
     </form>
   );
-}
+};
+
+export default LoginForm;

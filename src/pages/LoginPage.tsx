@@ -1,29 +1,27 @@
 import { useState } from 'react';
 import LoginForm from '../components/auth/LoginForm';
 import RegisterForm from '../components/auth/RegisterForm';
+import LoginCarousel from '../components/auth/LoginCarousel';
 
-import '../styles/login.css';
-import '../styles/loginback.css';
+import "../styles/login.css";
+import "../styles/loginback.css";
+
 
 export default function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true);
-
-  const handleSwitchToRegister = () => setIsLogin(false);
-  const handleSwitchToLogin = () => setIsLogin(true);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   return (
-    <main className={`login ${isLogin ? '' : 'sign-up-mode'}`}>
+    <main className={isSignUp ? 'sign-up-mode' : ''}>
       <div className="box">
         <div className="inner-box">
           <div className="forms-wrap">
-            {isLogin ? (
-              <LoginForm onSwitchToRegister={handleSwitchToRegister} />
+            {isSignUp ? (
+              <RegisterForm onToggle={() => setIsSignUp(false)} />
             ) : (
-              <RegisterForm onSwitchToLogin={handleSwitchToLogin} />
+              <LoginForm onToggle={() => setIsSignUp(true)} />
             )}
           </div>
-
-      
+          <LoginCarousel />
         </div>
       </div>
     </main>
